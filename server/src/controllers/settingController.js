@@ -5,7 +5,9 @@ const prisma = require('../config/prisma');
 // @access  Public
 const getSettings = async (req, res) => {
   try {
+    console.log("Starting DB query in getSettings...");
     let settings = await prisma.setting.findFirst();
+    console.log("DB query finished. Settings:", settings ? "found" : "null");
     if (!settings) {
       settings = await prisma.setting.create({
         data: {
@@ -28,6 +30,7 @@ const getSettings = async (req, res) => {
     }
     res.json({ ...settings, _id: settings.id });
   } catch (error) {
+    console.error("FATAL ERROR IN getSettings:", error);
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
