@@ -1,6 +1,5 @@
 generator client {
-  provider      = "prisma-client-js"
-  binaryTargets = ["native", "rhel-openssl-3.0.x", "rhel-openssl-1.0.x"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -14,9 +13,9 @@ model User {
   email     String     @unique
   password  String
   role      String     @default("user")
-  blogPosts BlogPost[]
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
+  blogPosts BlogPost[]
 }
 
 model BlogPost {
@@ -25,21 +24,21 @@ model BlogPost {
   slug           String   @unique
   content        String
   authorId       String?
-  author         User?    @relation(fields: [authorId], references: [id])
   imageUrl       String?
   seoTitle       String?
   seoDescription String?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+  author         User?    @relation(fields: [authorId], references: [id])
 }
 
 model Category {
   id        String    @id @default(uuid())
   name      String    @unique
   slug      String    @unique
-  galleries Gallery[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+  galleries Gallery[]
 }
 
 model Gallery {
@@ -48,11 +47,11 @@ model Gallery {
   imageUrl   String
   publicId   String
   categoryId String
-  category   Category @relation(fields: [categoryId], references: [id])
   isFeatured Boolean  @default(false)
   order      Int      @default(0)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+  category   Category @relation(fields: [categoryId], references: [id])
 }
 
 model Service {
@@ -63,9 +62,9 @@ model Service {
   deliverables String[]
   imageUrl     String?
   isActive     Boolean   @default(true)
-  bookings     Booking[] @relation("BookingServices")
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
+  bookings     Booking[] @relation("BookingServices")
 }
 
 model Booking {
@@ -80,7 +79,6 @@ model Booking {
   guestCount          Int?
   budgetRange         String?
   specialRequirements String?
-  services            Service[] @relation("BookingServices")
   status              String    @default("New Inquiry")
   totalPrice          Float
   referenceNumber     String    @unique
@@ -89,6 +87,7 @@ model Booking {
   emailsSent          Json?
   createdAt           DateTime  @default(now())
   updatedAt           DateTime  @updatedAt
+  services            Service[] @relation("BookingServices")
 }
 
 model Setting {

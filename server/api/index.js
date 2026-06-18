@@ -4,7 +4,8 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const path = require('path');
-const prisma = require('../src/config/prisma');
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 const bcrypt = require('bcryptjs');
 
 // Load env vars
@@ -136,7 +137,7 @@ async function seedDatabase() {
   }
 }
 
-seedDatabase();
+// seedDatabase();
 
 const app = express();
 
