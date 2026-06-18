@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme {
+  --color-luxury-black: #0a0a0a;
+  --color-luxury-dark: #1a1a1a;
+  --color-luxury-gold: #d4af37;
+  --color-luxury-lightGold: #f3e5ab;
+  --color-luxury-text: #f5f5f5;
+  --color-luxury-muted: #a3a3a3;
+  
+  --font-sans: "Inter", sans-serif;
+  --font-serif: "Playfair Display", serif;
+}
+
+@layer base {
+  body {
+    @apply bg-luxury-black text-luxury-text font-sans antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-luxury-dark/60 backdrop-blur-md border border-white/10;
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-luxury-lightGold to-luxury-gold;
+  }
+}
